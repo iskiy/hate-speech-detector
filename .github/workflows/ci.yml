@@ -1,0 +1,33 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest ruff
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Lint with Ruff
+        run: |
+          ruff --ignore=F401,E501 --format=github --target-version=py37 .
+        continue-on-error: true
+#      - name: Test with pytest
+#        run: |
+#          pytest --dataset-loc=checkpoints/data.csv tests/data --verbose --disable-warnings
+#          pytest tests/code --verbose --disable-warnings
+#          pytest --model-loc=checkpoints/mnb_model.joblib --vectorizer-loc=checkpoints/vectorizer.pkl tests/model --verbose --disable-warnings
