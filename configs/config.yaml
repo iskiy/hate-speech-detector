@@ -1,0 +1,5 @@
+model:
+  _target_: sklearn.linear_model.LinearRegression
+  fit_intercept: true
+  copy_X: true
+  n_jobs: null
