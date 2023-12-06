@@ -1,29 +1,31 @@
 import hydra
-from omegaconf import DictConfig
-import pandas as pd
 import numpy as np
-
-import filter_text
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
+from omegaconf import DictConfig
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report
+from sklearn.model_selection import train_test_split
 from sklearn.multioutput import MultiOutputClassifier
-
-
-
+import filter_text
 
 
 @hydra.main(version_base=None, config_path="./../configs", config_name="config")
-def train_model(train_path='./../dataset/train.csv', test_path='./../dataset/test.csv'):
+def train_model(
+    cfg: DictConfig,
+    train_path="./../dataset/train.csv",
+    test_path="./../dataset/test.csv",
+):
     train_df = pd.read_csv(train_path)
     # test_df = pd.read_csv(test_path, usecols=['comment_text'])
 
-    train_df['comment_text'] = train_df['comment_text'].apply(filter_text)
+    train_df["comment_text"] = train_df["comment_text"].apply(filter_text)
 
-    X = train_df['comment_text'].values
-    y = train_df.drop(['id', 'comment_text'], axis=1)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    X = train_df["comment_text"].values
+    y = train_df.drop(["id", "comment_text"], axis=1)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.3, random_state=42
+    )
 
     vectorizer = TfidfVectorizer()
     X_train_tfidf = vectorizer.fit_transform(X_train)
@@ -43,6 +45,8 @@ def train_model(train_path='./../dataset/train.csv', test_path='./../dataset/tes
     # Evaluate the model
     score = model.score(X_test, y_test)
     print(f"Model Score: {score}")
+
+
 #
 
 if __name__ == "__main__":
