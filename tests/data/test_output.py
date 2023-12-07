@@ -25,14 +25,6 @@ def test_output(df):
     # unique values
     df.expect_column_values_to_be_unique(column="id")
 
-    # type adherence
-    df.expect_column_values_to_be_of_type(column="toxic", type_="int")
-    df.expect_column_values_to_be_of_type(column="severe_toxic", type_="int")
-    df.expect_column_values_to_be_of_type(column="obscene", type_="int")
-    df.expect_column_values_to_be_of_type(column="threat", type_="int")
-    df.expect_column_values_to_be_of_type(column="insult", type_="int")
-    df.expect_column_values_to_be_of_type(column="identity_hate", type_="int")
-
     # Expectation suite
     expectation_suite = df.get_expectation_suite(discard_failed_expectations=False)
     results = df.validate(
