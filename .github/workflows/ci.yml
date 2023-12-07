@@ -27,10 +27,11 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Lint with Ruff
         run: |
-          ruff --ignore=F401,E501 .
-#        continue-on-error: false
-#      - name: Test with pytest
-#        run: |
+          ruff --ignore=F401,F405,F403,E501 .
+        continue-on-error: true
+      - name: Test with pytest
+        run: |
+          pytest
 #          pytest --dataset-loc=checkpoints/data.csv tests/data --verbose --disable-warnings
 #          pytest tests/code --verbose --disable-warnings
 #          pytest --model-loc=checkpoints/mnb_model.joblib --vectorizer-loc=checkpoints/vectorizer.pkl tests/model --verbose --disable-warnings

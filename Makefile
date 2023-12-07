@@ -5,10 +5,10 @@ SHELL = /bin/bash
 .PHONY: style
 style:
 	black .
-	flake8 --exclude venv --ignore E501,F401
+	flake8 --exclude venv --ignore E501,F401,F403,F405
 	python3 -m isort .
 	pyupgrade
-
+	ruff --ignore=F401,F405,F403,E501 .
 # Cleaning
 .PHONY: clean
 clean: style

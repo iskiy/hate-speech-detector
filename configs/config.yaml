@@ -1,5 +1,7 @@
-model:
-  _target_: sklearn.linear_model.LinearRegression
-  fit_intercept: true
-  copy_X: true
-  n_jobs: null
+test:
+  testval: 10
+#model:
+#  _target_: sklearn.linear_model.LinearRegression
+#  fit_intercept: true
+#  copy_X: true
+#  n_jobs: null

@@ -22,6 +22,7 @@ repos:
             args: ["style"]
             language: system
             pass_filenames: false
+
   -   repo: local
       hooks:
         -   id: clean
