@@ -82,9 +82,9 @@ def predict(trained_model, y,
 
     predictions_df = predictions_df[['id'] + list(y.columns)]
 
-    predictions_df.to_csv(result_path, index=False)
+    save_data(result_path, predictions_df)
 
 
 if __name__ == "__main__":
-    x, y, model = train_model()
-    predict(model, y)
+    x_, y_, model = train_model()
+    predict(model, y_)
