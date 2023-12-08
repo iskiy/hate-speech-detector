@@ -1,7 +1,16 @@
 def test_dataset(df):
     """Test dataset quality and integrity."""
     # schema adherence
-    column_list = ["id", "comment_text", "toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
+    column_list = [
+        "id",
+        "comment_text",
+        "toxic",
+        "severe_toxic",
+        "obscene",
+        "threat",
+        "insult",
+        "identity_hate",
+    ]
     df.expect_table_columns_to_match_ordered_list(column_list=column_list)
     # expected labels
     labels = [0, 1]

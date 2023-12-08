@@ -33,6 +33,3 @@ jobs:
       - name: Test with pytest
         run: |
           pytest tests/code --verbose --disable-warnings
-#          pytest --dataset-loc=checkpoints/data.csv tests/data --verbose --disable-warnings
-#          pytest tests/code --verbose --disable-warnings
-#          pytest --model-loc=checkpoints/mnb_model.joblib --vectorizer-loc=checkpoints/vectorizer.pkl tests/model --verbose --disable-warnings

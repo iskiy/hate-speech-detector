@@ -1,7 +1,15 @@
 def test_output(df):
     """Test output."""
     # schema adherence
-    column_list = ["id", "toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
+    column_list = [
+        "id",
+        "toxic",
+        "severe_toxic",
+        "obscene",
+        "threat",
+        "insult",
+        "identity_hate",
+    ]
     df.expect_table_columns_to_match_ordered_list(column_list=column_list)
 
     # expected labels

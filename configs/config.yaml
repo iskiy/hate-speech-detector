@@ -1,7 +1,16 @@
-test:
-  testval: 10
-#model:
-#  _target_: sklearn.linear_model.LinearRegression
-#  fit_intercept: true
-#  copy_X: true
-#  n_jobs: null
+data:
+  train_path: "./dataset/train.csv"
+  test_path: "./dataset/test.csv"
+  result_path: "./dataset/result.csv"
+
+test_size: 0.2
+
+model_params:
+  c: 4
+  max_iter: 10000
+  class_weight: "balanced"
+
+vectorizer_params:
+  max_features: 5000
+  ngram_range: [1, 2]
+  sublinear_tf: false

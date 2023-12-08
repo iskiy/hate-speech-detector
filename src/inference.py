@@ -1,13 +1,15 @@
-from joblib import load
-import requests
-from io import BytesIO
-from filter_text import filter_text
 import warnings
+from io import BytesIO
+
 import click
+import requests
+from joblib import load
 
-class_names = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+from filter_text import filter_text
 
-warnings.filterwarnings('ignore')
+class_names = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
+
+warnings.filterwarnings("ignore")
 
 
 def download_and_load_file(url):
@@ -25,13 +27,23 @@ def predict(text, model, vectorizer):
 
 
 @click.command()
-@click.option('--model_url',
-              default='https://raw.githubusercontent.com/iskiy/hate-speech-detector/main/configs/model.joblib',
-              help='URL to download the model')
-@click.option('--vectorizer_url',
-              default='https://raw.githubusercontent.com/iskiy/hate-speech-detector/main/configs/tfidf_vectorizer.joblib',
-              help='URL to the TF-IDF vectorizer')
-@click.option('--text', required=True, default=None, prompt='Enter text to classify', help='Text to classify')
+@click.option(
+    "--model_url",
+    default="https://raw.githubusercontent.com/iskiy/hate-speech-detector/main/configs/model.joblib",
+    help="URL to download the model",
+)
+@click.option(
+    "--vectorizer_url",
+    default="https://raw.githubusercontent.com/iskiy/hate-speech-detector/main/configs/tfidf_vectorizer.joblib",
+    help="URL to the TF-IDF vectorizer",
+)
+@click.option(
+    "--text",
+    required=True,
+    default=None,
+    prompt="Enter text to classify",
+    help="Text to classify",
+)
 def main(model_url, vectorizer_url, text):
     model = download_and_load_file(model_url)
     vectorizer = download_and_load_file(vectorizer_url)
