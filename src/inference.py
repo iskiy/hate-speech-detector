@@ -23,7 +23,7 @@ def download_and_load_file(url):
 def predict(text, model, vectorizer):
     filtered_text = filter_text(text)
     tfidf_x = vectorizer.transform([filtered_text])
-    return model.predict(tfidf_x)
+    return model.predict_proba(tfidf_x)
 
 
 @click.command()
@@ -48,13 +48,9 @@ def main(model_url, vectorizer_url, text):
     model = download_and_load_file(model_url)
     vectorizer = download_and_load_file(vectorizer_url)
 
-    prediction_array = predict(text, model, vectorizer)[0]
-    predictions = []
-    for i, class_label in enumerate(class_names):
-        if prediction_array[i] == 1:
-            predictions.append(class_label)
-
-    print(predictions)
+    prediction_array = predict(text, model, vectorizer)
+    predictions = [arr[0, 1] for arr in prediction_array]
+    print(list(zip(class_names, predictions)))
 
 
 if __name__ == "__main__":
